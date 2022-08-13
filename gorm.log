@@ -1,0 +1,18 @@
+
+2022/08/13 16:15:20 [32m/Users/Maksym_Kostynskyi/go/pkg/mod/gorm.io/driver/postgres@v1.3.8/migrator.go:167
+[0m[33m[123.110ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND table_type = 'BASE TABLE'
+
+2022/08/13 16:15:20 [32m/Users/Maksym_Kostynskyi/go/pkg/mod/gorm.io/driver/postgres@v1.3.8/migrator.go:140
+[0m[33m[118.601ms] [34;1m[rows:0][0m CREATE TABLE "users" ("id" text,"name" text,"email" text,"password" varchar (100) NOT NULL,PRIMARY KEY ("id"))
+
+2022/08/13 16:18:18 [31;1m/Users/Maksym_Kostynskyi/Code/playground/go-graphql-jwt/service/user.go:47 [35;1mrecord not found
+[0m[33m[29.712ms] [34;1m[rows:0][0m SELECT * FROM "users" WHERE email LIKE 'test@test.com' LIMIT 1
+
+2022/08/13 16:18:18 [32m/Users/Maksym_Kostynskyi/Code/playground/go-graphql-jwt/service/user.go:25
+[0m[33m[33.664ms] [34;1m[rows:1][0m INSERT INTO "users" ("id","name","email","password") VALUES ('5fd903ab-387c-4111-a10c-23f60115188a','Test','test@test.com','$2a$10$NUV.yca45KJucblcyNZ3t.5s2mxvKPZcYBwk0BkbYTcG/matagII.')
+
+2022/08/13 16:19:53 [32m/Users/Maksym_Kostynskyi/Code/playground/go-graphql-jwt/service/user.go:47
+[0m[33m[25.140ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE email LIKE 'test@test.com' LIMIT 1
+
+2022/08/13 16:20:06 [32m/Users/Maksym_Kostynskyi/Code/playground/go-graphql-jwt/service/user.go:47
+[0m[33m[5.798ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE email LIKE 'test@test.com' LIMIT 1
