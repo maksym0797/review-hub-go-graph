@@ -31,8 +31,10 @@ func (r *queryResolver) User(ctx context.Context, id string) (*model.User, error
 }
 
 // Protected is the resolver for the protected field.
-func (r *queryResolver) Protected(ctx context.Context) (string, error) {
-	return "Success", nil
+func (r *queryResolver) Protected(ctx context.Context) (interface{}, error) {
+	return map[string]interface{}{
+		"test": "test",
+	}, nil
 }
 
 // AuthOps returns generated.AuthOpsResolver implementation.

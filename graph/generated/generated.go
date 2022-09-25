@@ -76,7 +76,7 @@ type MutationResolver interface {
 }
 type QueryResolver interface {
 	User(ctx context.Context, id string) (*model.User, error)
-	Protected(ctx context.Context) (string, error)
+	Protected(ctx context.Context) (interface{}, error)
 }
 
 type executableSchema struct {
@@ -268,7 +268,7 @@ type Query {
   user(id: ID!): User! @goField(forceResolver: true)
 
   # Add Protected Resource
-  protected: String! @goField(forceResolver: true) @auth
+  protected: Any! @goField(forceResolver: true) @auth
 }
 
 type Mutation {
@@ -643,10 +643,10 @@ func (ec *executionContext) _Query_protected(ctx context.Context, field graphql.
 		if tmp == nil {
 			return nil, nil
 		}
-		if data, ok := tmp.(string); ok {
+		if data, ok := tmp.(interface{}); ok {
 			return data, nil
 		}
-		return nil, fmt.Errorf(`unexpected type %T from directive, should be string`, tmp)
+		return nil, fmt.Errorf(`unexpected type %T from directive, should be interface{}`, tmp)
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -658,9 +658,9 @@ func (ec *executionContext) _Query_protected(ctx context.Context, field graphql.
 		}
 		return graphql.Null
 	}
-	res := resTmp.(string)
+	res := resTmp.(interface{})
 	fc.Result = res
-	return ec.marshalNString2string(ctx, field.Selections, res)
+	return ec.marshalNAny2interface(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_Query_protected(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -670,7 +670,7 @@ func (ec *executionContext) fieldContext_Query_protected(ctx context.Context, fi
 		IsMethod:   true,
 		IsResolver: true,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type String does not have child fields")
+			return nil, errors.New("field of type Any does not have child fields")
 		},
 	}
 	return fc, nil

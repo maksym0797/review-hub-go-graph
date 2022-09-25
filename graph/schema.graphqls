@@ -32,7 +32,7 @@ type Query {
   user(id: ID!): User! @goField(forceResolver: true)
 
   # Add Protected Resource
-  protected: String! @goField(forceResolver: true) @auth
+  protected: Any! @goField(forceResolver: true) @auth
 }
 
 type Mutation {
